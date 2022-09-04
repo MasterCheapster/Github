@@ -12,6 +12,42 @@ int main()
 class Solution
 {
 public:
+
+    vector<int> twoSum(vector<int> &nums, int target) {
+	int n = nums.size();
+        vector<int> v;
+        
+        // passing in multimap 
+        multimap<int, int> mp;
+        for(int i=0; i<n ;i++) {
+            mp.insert(pair<int, int>(nums[i] , i));
+        }
+        
+        // binary search 
+        multimap<int, int> :: iterator it;
+        multimap<int, int> :: iterator it2;
+
+        it = mp.begin();
+        it2 = mp.end(); it2--;
+        cout << it->first << " " << it2->first << endl;
+        while( it->first + it2->first != target) {
+            if( it->first + it2->first > target) {
+                it2--;
+            }
+            else {
+                it++;
+            }
+        }
+        // inserting the index of the two number whose sum is target
+        v.push_back(it->second);
+        v.push_back(it2->second);
+        return v;	    
+    }
+
+
+//    Brute Force approach
+
+    /*
     vector<int> twoSum(vector<int> &nums, int target)
     {
         for (int i = 0; i < sizeof(nums) / sizeof(nums[0]); i++)
@@ -30,4 +66,5 @@ public:
             }
         }
     }
+    */
 };
